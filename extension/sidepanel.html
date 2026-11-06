@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head><meta charset="UTF-8" /><title>YouTube Quick Download</title><link rel="stylesheet" href="popup.css" /></head>
+<body>
+  <div class="app-container">
+    <header class="app-header"><div class="brand"><span aria-hidden="true">⚡</span><h1>YT Quick Download</h1></div><span class="brand-credit">by Tràng Dương</span></header>
+    <nav class="tabs" aria-label="Điều hướng"><button id="downloadTab" class="tab active">Tải xuống</button><button id="queueTab" class="tab">Hàng đợi</button><button id="historyTab" class="tab">Lịch sử</button><button id="settingsTab" class="tab">Cài đặt</button></nav>
+    <section id="downloadPanel" class="panel">
+      <div id="dependencyStatus" class="dependency-status">Đang kiểm tra ffmpeg/Deno...</div>
+      <button id="btnMp3" class="btn btn-mp3">🎵 Tải MP3 (Audio)</button><button id="btnMp4" class="btn btn-mp4">🎬 Tải MP4 (Video)</button><button id="btnAddQueue" class="btn btn-queue">＋ Thêm video hiện tại vào hàng đợi</button>
+      <label class="form-label">Nhiều link YouTube<textarea id="bulkUrls" class="form-input bulk-input" rows="3" placeholder="Dán mỗi link trên một dòng..."></textarea></label>
+      <div id="bulkDropZone" class="bulk-drop-zone">Kéo thả file .txt vào đây hoặc dán link bên trên</div>
+      <button id="btnAddBulkQueue" class="btn btn-primary">＋ Thêm nhiều link vào hàng đợi</button>
+      <button id="retryButton" class="btn btn-retry" hidden>↻ Thử lại lần cuối</button>
+      <button id="cancelDownloadButton" class="btn btn-cancel" hidden>■ Hủy tải</button>
+    </section>
+    <section id="queuePanel" class="panel" hidden><div class="section-heading"><strong>Hàng đợi tải</strong><span id="queueCount" class="count-badge">0</span></div><label class="form-label">Định dạng hàng đợi<select id="queueMode" class="form-select"><option value="mp4">MP4 (Video)</option><option value="mp3">MP3 (Audio)</option></select></label><div id="queueList" class="item-list"></div><button id="btnStartQueue" class="btn btn-queue">▶ Tải lần lượt</button><button id="btnClearQueue" class="text-btn">Xóa hàng đợi</button></section>
+    <section id="historyPanel" class="panel" hidden><div class="section-heading"><strong>Lịch sử tải</strong><button id="btnClearHistory" class="text-btn">Xóa lịch sử</button></div><div id="historyList" class="item-list"></div></section>
+    <section id="settingsPanel" class="panel" hidden>
+      <label class="side-panel-option"><span>Mở bằng Side Panel</span><input id="sidePanelEnabled" type="checkbox" /></label><label class="side-panel-option"><span>Chế độ tối</span><input id="themeToggle" type="checkbox" /></label><label class="form-label">Thư mục lưu trên máy<input id="saveDir" class="form-input" type="text" placeholder="Để trống: Downloads của Windows" /></label>
+      <div class="setting-row"><label class="form-label">MP3<select id="audioQuality" class="form-select"><option value="128">128 kbps</option><option value="192">192 kbps</option><option value="256">256 kbps</option><option value="320" selected>320 kbps</option></select></label><label class="form-label">Video<select id="videoQuality" class="form-select"><option value="360">360p</option><option value="480">480p</option><option value="720">720p</option><option value="1080" selected>1080p</option></select></label></div>
+      <label class="form-label">Mẫu tên file<input id="filenameTemplate" class="form-input" type="text" value="%(title).70s" placeholder="%(title).70s" /></label><label class="side-panel-option"><span>Tải phụ đề</span><input id="subtitles" type="checkbox" /></label><label class="form-label">Ngôn ngữ phụ đề<input id="subtitleLanguage" class="form-input" type="text" value="vi" placeholder="vi hoặc vi,en" /></label><p class="hint">Mẫu tên: %(title)s, %(uploader)s, %(upload_date)s. Phụ đề lưu cùng thư mục tải.</p>
+    </section>
+    <div class="status-box"><div id="progressWrap" class="progress-wrap" hidden><div class="progress-meta"><span>Tiến trình tải</span><span id="progressLabel">0%</span></div><div class="progress-track"><div id="progressBar" class="progress-bar"></div></div></div><p id="status" class="status">Mở một video YouTube rồi chọn định dạng.</p></div>
+  </div><script src="shared.js"></script><script src="popup.js"></script>
+</body>
+</html>
